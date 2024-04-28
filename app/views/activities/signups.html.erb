@@ -1,0 +1,21 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Activities", path: activities_path },
+  { name: @activity.title, path: activity_path(@activity) },
+  { name: "Signups" }
+]) %>
+
+<ul class="list-group">
+  <% @signups.each do |signup| %>
+    <%= link_to user_path(signup.user), class: "list-group-item list-group-item-action pt-2 pb-2" do %>
+      <div class="hstack gap-3 fs-5">
+        <img src="<%= signup.user.profile_picture %>" class="rounded-circle" width="40" height="40">
+        <span>
+          <strong><%= signup.user.first_name %> <%= signup.user.last_name %></strong> <%= signup.third_person_status.downcase %>
+        </span>
+        <% if signup.attended %>
+          <i class="fa-solid fa-check text-success ms-auto"></i>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</ul>

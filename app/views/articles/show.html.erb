@@ -1,0 +1,6 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Articles", path: articles_path },
+  { name: @article.title },
+]) %>
+
+<%= render @article %>

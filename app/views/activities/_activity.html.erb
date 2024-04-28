@@ -1,0 +1,149 @@
+<div class="row g-4 mb-4">
+  <div class="col-xl-8">
+    <div class="mb-4 d-flex align-items-center">
+      <div>
+        <div class="display-6">
+          <%= activity.title %>
+        </div>
+        <span class="badge rounded-pill <%= status_class %>">
+          <%= activity.status.humanize %>
+        </span>
+        <span class="badge rounded-pill text-bg-primary">
+          <%= activity.activity_type.title %>
+        </span>
+      </div>
+      <% if current_user.officer? %>
+        <div class="ms-auto">
+          <%= link_to 'Edit', edit_activity_path(activity), class: "btn btn-primary" %>
+          <%= link_to 'Delete', delete_activity_path(activity), class: "btn btn-danger" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="border-top border-bottom pt-3 pb-3 d-flex align-items-center">
+      <% if @signup.status.present? %>
+        <span>
+          <strong>Your Status: </strong> <%= @signup.status_or_attended %>
+        </span>
+      <% end %>
+      <div class="hstack gap-2 ms-auto">
+        <% if show_signup_button %>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
+            <% if @signup.status.present? %>
+              Change Status
+            <% else %>
+              Sign Up
+            <% end %>
+          </button>
+        <% end %>
+        <% if show_verify_attendance_button %>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#attendanceModal">
+            Verify Attendance
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Activity Details</h5>
+        <p>
+          <i class="fa-solid fa-location-dot text-secondary me-2"></i><%= activity.location %>
+        </p>
+        <p class="m-0 p-0">
+          <strong>Start: </strong>
+          <%= I18n.l(activity.start_time, format: :long) %>
+        </p>
+        <p class="m-0 p-0">
+          <strong>End: </strong>
+          <%= I18n.l(activity.end_time, format: :long) %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-xl-8 tiptap card">
+    <div class="card-body mt-3">
+      <%= activity.description.html_safe %>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <ul class="list-group">
+      <% @first_five_signups.each do |signup| %>
+        <li class="list-group-item">
+          <div class="hstack gap-3">
+            <img src="<%= signup.user.profile_picture %>" class="rounded-circle" width="30" height="30">
+            <span>
+              <strong><%= signup.user.first_name %> <%= signup.user.last_name %></strong> <%= signup.third_person_status.downcase %>
+            </span>
+            <% if signup.attended %>
+              <i class="fa-solid fa-check text-success ms-auto"></i>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+      <li class="list-group-item d-grid">
+          <%= link_to signups_activity_path(activity), class: "link link-secondary link-underline-opacity-0 pt-1 pb-1" do %>
+            <div class="hstack gap-3">
+              <span>
+                See All Signups
+              </span>
+              <i class="fa-solid fa-arrow-right ms-auto"></i>
+            </div>
+          <% end %>
+      </li>
+    </ul>
+    <div class="text-secondary text-end fs-6 fw-light mt-3">
+      <i class="fa-solid fa-user-friends me-2"></i><%= pluralize(@num_signups, 'Member') %> Signed Up
+    </div>
+  </div>
+</div>
+
+<%= form_with(model: activity, url: verify_attendance_activity_path(activity), method: :post) do |form| %>
+  <div class="modal fade" id="attendanceModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Verify Attendance</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+              <%= label_tag :passcode_input, "Passcode", class: "form-label" %>
+              <%= number_field_tag :passcode_input, nil, class: "form-control" %>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= form.submit "Submit Passcode", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= form_with(model: @signup, url: signup_activity_path(activity), method: :post) do |form| %>
+  <div class="modal fade" id="signupModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Sign Up for Activity</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <%= form.label :status %>
+            <%= form.select :status, ActivityParticipation.statuses.keys.map { |status| [status.humanize, status] }, {}, class: "form-control" %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= form.submit "Submit", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

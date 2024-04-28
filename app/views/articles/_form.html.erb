@@ -1,0 +1,27 @@
+<%= form_with(model: @article) do |form| %>
+  <div class="row">
+    <div class="d-flex flex-column">
+      <div class="form-floating mb-3">
+        <%= form.text_field :title, class: "form-control", id: "floatingTitle", placeholder: "Title" %>
+        <%= form.label :title, for: "floatingTitle" %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= form.collection_select :article_category_id, ArticleCategory.all, :id, :name, { prompt: "Select Category" }, { class: "form-select", id: "floatingCategory" } %>
+        <%= form.label :category_id, for: "floatingCategory" %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= form.collection_select :article_module_id, ArticleModule.order(:priority), :id, :name, { prompt: "Select Module" }, { class: "form-select", id: "floatingModule" } %>
+        <%= form.label :module_id, for: "floatingModule" %>
+      </div>
+
+      <label class="form-label">Body</label>
+      <%= render partial: 'layouts/shared/editor', locals: { form: form, field_name: :body } %>
+
+      <div>
+        <%= form.submit class: "btn btn-primary mt-3" %>
+      </div>
+    </div>
+  </div>
+<% end %>

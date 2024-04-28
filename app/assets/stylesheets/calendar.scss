@@ -1,0 +1,50 @@
+$tamu-maroon: #500000;
+
+.simple-calendar {
+    .day {}
+
+    .week {
+        height: 100px;
+    }
+
+    .wday-0 {}
+    .wday-1 {}
+    .wday-2 {}
+    .wday-3 {}
+    .wday-4 {}
+    .wday-5 {}
+    .wday-6 {}
+
+    .today {
+        background: var(--bs-secondary-bg);
+        color: var(--bs-primary);
+    }
+    .past {}
+    .future {}
+
+    .start-date {}
+
+    .prev-month, .next-month {
+        color: var(--bs-secondary);
+        background: var(--bs-dark-bg-subtle);
+    }
+    .current-month {}
+
+    .has-events {}
+
+    .event {
+        background: #8a1f11;
+        text-align: center;
+        border-radius: 0.5rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .event:hover {
+        background: #b32d1f;
+        cursor: pointer;
+    }
+}

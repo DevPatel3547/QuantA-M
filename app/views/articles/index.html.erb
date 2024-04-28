@@ -1,0 +1,62 @@
+<div class="hstack mb-3">
+  <h1>Articles</h1>
+  <% if current_user.officer? %>
+    <div class="ms-auto hstack gap-2 flex-wrap justify-content-end">
+      <%= link_to 'Modules', article_modules_path, class: "btn btn-outline-secondary" %>
+      <%= link_to 'Categories', article_categories_path, class: "btn btn-outline-secondary" %>
+      <%= link_to 'New Article', new_article_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <div class="hstack gap-3 flex-wrap-reverse align-items-end">
+    <div class="vstack gap-3 col col-8-md">
+      <%= form_with url: articles_path, method: :get do %>
+        <div class="input-group">
+          <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search articles..." %>
+          <%= submit_tag 'Search', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <% if @articles.empty? %>
+        <p>No articles were found.</p>
+      <% else %>
+        <% @articles.each do |article_module, articles| %>
+          <div class="card">
+            <div class="card-header fw-light p-3 fs-4">
+              <%= article_module.name %>
+            </div>
+            <ul class="list-group list-group-flush">
+              <% articles.each do |article| %>
+                <%= link_to article, class: 'list-group-item list-group-item-action p-3 hstack gap-2' do %>
+                  <%= article.title %>
+                  <div class="ms-auto">
+                    <span class="badge rounded-pill text-bg-secondary"><%= article.article_category.name %></span>
+                  </div>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col col-4-md">
+      <div class="card">
+        <div class="card-header">
+          Categories
+        </div>
+        <div class="card-body">
+          <%= form_with url: articles_path, method: :get do %>
+            <% @categories.each do |category| %>
+              <div class="form-check">
+                <%= check_box_tag 'category[]', category.id, params[:category].blank? || params[:category]&.include?(category.id.to_s), id: "category_#{category.id}", class: "form-check-input" %>
+                <%= label_tag "category_#{category.id}", category.name, class: "form-check-label" %>
+              </div>
+            <% end %>
+            <%= submit_tag 'Filter', class: "btn btn-primary mt-3" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

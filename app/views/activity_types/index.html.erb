@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+<h1>Activity Types</h1>
+
+<ul>
+  <% @activity_types.each do |activity_type| %>
+    <li><%= activity_type.title %></li>
+    <%= link_to 'Edit Activity Type', edit_activity_type_path(activity_type) %>
+    <%= link_to "Delete", delete_activity_type_path(activity_type)%>
+  <% end %>
+</ul>
+
+<%= link_to 'New Activity Type', new_activity_type_path %><br>
+<%= link_to 'Back', advanced_settings_index_path %>

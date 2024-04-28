@@ -1,0 +1,11 @@
+{
+    "stack": "heroku-20",
+    "environments": {
+        "review": {
+            "addons": ["heroku-postgresql:mini"],
+            "scripts": {
+                "postdeploy": "rails db:seed"
+            }
+        }
+    }
+}

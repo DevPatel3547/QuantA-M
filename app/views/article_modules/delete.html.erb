@@ -1,0 +1,13 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Articles", path: articles_path },
+  { name: "Modules", path: article_modules_path },
+  { name: @article_module.name, path: article_modules_path },
+  { name: "Delete" }
+]) %>
+
+<div>
+  <h2>Delete Article Module</h2>
+  <p>Are you sure you want to permanently delete <strong><%= @article_module.name %></strong>?</p>
+  <p>This will delete ALL the articles associated with the module!</p>
+  <%= button_to "Delete Module", article_module_path(@article_module), method: :delete, class: "btn btn-danger" %>
+</div>

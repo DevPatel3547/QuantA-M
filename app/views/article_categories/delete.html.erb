@@ -1,0 +1,13 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Articles", path: articles_path },
+  { name: "Categories", path: article_categories_path },
+  { name: @article_category.name, path: article_categories_path },
+  { name: "Delete" }
+]) %>
+
+<div>
+  <h2>Delete Article Category</h2>
+  <p>Are you sure you want to permanently delete <strong><%= @article_category.name %></strong>?</p>
+  <p>This will delete ALL the articles associated with the category!</p>
+  <%= button_to "Delete Category", article_category_path(@article_category), method: :delete, class: "btn btn-danger" %>
+</div>

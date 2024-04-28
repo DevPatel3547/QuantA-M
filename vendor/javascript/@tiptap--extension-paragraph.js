@@ -1,0 +1,2 @@
+import{mergeAttributes as t,Node as r}from"@tiptap/core";const e=r.create({name:"paragraph",priority:1e3,addOptions(){return{HTMLAttributes:{}}},group:"block",content:"inline*",parseHTML(){return[{tag:"p"}]},renderHTML({HTMLAttributes:r}){return["p",t(this.options.HTMLAttributes,r),0]},addCommands(){return{setParagraph:()=>({commands:t})=>t.setNode(this.name)}},addKeyboardShortcuts(){return{"Mod-Alt-0":()=>this.editor.commands.setParagraph()}}});export{e as Paragraph,e as default};
+

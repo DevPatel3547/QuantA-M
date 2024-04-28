@@ -1,0 +1,59 @@
+<div class="hstack mb-3 gap-3 align-items-center">
+  <%= image_tag current_user.profile_picture_or_default, alt: "Profile Picture", width: "60", height: "60", class: "rounded-circle" %>
+  <div class="vstack">
+    <h2 class="display-6 m-0">Welcome, <%= current_user.first_name %></h2>
+    <span>You have <b><%= @total_points %></b> points.</span>
+  </div>
+</div>
+
+<div class="row gx-3 gy-3">
+  <div class="col-12 col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="mb-3">About Us</h3>
+        <p> Howdy, and welcome to QuantA&M, Texas A&M's first student organization for those interested in learning more about quantum computing. We hope to achieve our mission by facilitating events and networking opportunities for our members, giving everyone an opportunity to consider the vast field of quantum technology as an undergraduate. We are an inclusive org, targeting undergraduate students from all majors. Graduate students may also participate in club activities, but with the added option to serve as a "graduate mentor," offering advice and research assistance to undergrads on a flexible schedule. QuantA&M was founded halfway through the 2022-2023 academic year, and as such, we are slowly transitioning from a small student organization to a large one. We are currently offering free membership on an unofficial basis, all of our meetings are open to the student body, with no dues required. To learn more about what we do, check out the "Events" tab, and if you have further questions, contact someone from our team. Thanks and Gig'em. </p>
+        <h3 class="mb-3">Our Mission</h3>
+        <p> The mission of QuantA&M is to connect students with the resources they need to learn more about the development, implementation, and application of quantum computing technology. The organization also hopes to bring a new generation of inquisitive students to the forefront of quantum computing innovation as we enter a society which uses quantum computing as a mainstream method of solving complex problems. </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4 vstack gap-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5><i class="fa-regular fa-calendar text-secondary me-2"></i>Upcoming Activities</h5>
+        <ul class="list-group mt-3">
+          <% @upcoming_activities.each do |activity| %>
+            <%= link_to activity, class: 'd-flex align-items-center list-group-item list-group-item-action' do %>
+              <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                  <span class="fw-medium m-0"><%= activity.title %></span>
+                  <span class="fw-light m-0">
+                    <%= activity.start_time.to_date == Date.today ? 'Today' : activity.start_time.strftime('%A') %>,
+                    <%= activity.start_time.strftime('%l:%M %p') %>
+                  </span>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5><i class="fa-regular fa-newspaper text-secondary me-2"></i>Recent Articles</h5>
+        <ul class="list-group mt-3">
+          <% @recent_articles.each do |article| %>
+            <%= link_to article, class: 'd-flex align-items-center list-group-item list-group-item-action' do %>
+              <div class="vstack">
+                <span class="fw-medium m-0"><%= article.title %></span>
+                <span class="fw-light">Published <%= time_ago_in_words(article.created_at) %> ago</span>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

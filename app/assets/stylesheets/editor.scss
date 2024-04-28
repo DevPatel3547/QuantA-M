@@ -1,0 +1,61 @@
+pre {
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+  padding: 10px;
+  border-radius: 5px;
+  text-wrap: wrap;
+}
+
+.tiptap {
+  .ProseMirror {
+    border: 1px solid var(--bs-secondary);
+    border-radius: 5px;
+    padding: 11px;
+    outline: none;
+    min-height: 200px;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  ul p {
+    margin: 0;
+  }
+
+  p:empty {
+    content: "";
+    display: block;
+    height: 1em;
+  }
+
+  img {
+    max-height: 400px;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 1rem;
+  }
+}
+
+.editor {
+  .editor-toolbar {
+    margin-bottom: 10px;
+  }
+
+  .dropdown-links {
+    cursor: pointer;
+  }
+
+  .editor-button {
+    background-color: var(--bs-body-bg);
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+
+  .editor-button--active {
+    background-color: var(--bs-primary-bg-subtle);
+  }
+
+  .editor-button:hover {
+    background-color: var(--bs-secondary-bg);
+  }
+}

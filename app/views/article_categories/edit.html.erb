@@ -1,0 +1,10 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Articles", path: articles_path },
+  { name: "Categories", path: article_categories_path },
+  { name: @article_category.name, path: article_categories_path },
+  { name: "Edit" }
+]) %>
+
+<h1>Edit Category</h1>
+
+<%= render "form", article_category: @article_category %>

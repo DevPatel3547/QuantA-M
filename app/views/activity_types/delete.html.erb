@@ -1,0 +1,13 @@
+<h2>Delete Activity Type</h2>
+
+  <%= form_for(@activity_type, method: 'delete') do |f| %>
+    <% # url: task_path(@activity_type), method: 'delete' %>
+
+    <p>Are you sure you want to permanently delete this activity type?</p>
+    <%= render @activity_type %>
+
+    <div class="form-buttons">
+      <%= button_to("Delete Activity Type", @activity_type, method: :delete, class: "btn btn-danger") %>
+    </div>
+
+  <% end %>

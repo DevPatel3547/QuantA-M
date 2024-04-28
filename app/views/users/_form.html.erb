@@ -1,0 +1,29 @@
+<%= form_with(model: @user) do |form| %>
+  <label class="form-label">User Preferences</label>
+
+  <div class="form-floating mb-3">
+    <%= form.text_field :first_name, class: "form-control", id: "floatingFirstName" %>
+    <%= form.label :first_name, 'First Name', for: "floatingFirstName" %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.text_field :last_name, class: "form-control", id: "floatingLastName" %>
+    <%= form.label :last_name, 'Last Name', for: "floatingLastName" %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.time_zone_select :timezone, nil, {}, class: "form-control", id: "floatingTimeZone" %>
+    <%= form.label :timezone, 'Time Zone', for: "floatingTimeZone" %>
+  </div>
+
+  <% if policy(@user).set_officer? %>
+    <div class="form-check form-switch">
+      <%= form.check_box :officer, class: "form-check-input", role: "switch", id: "officerSwitch" %>
+      <%= form.label :officer, 'Officer', class: "form-check-label", for: "officerSwitch" %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit "Update Profile", class: "btn btn-primary mt-3" %>
+  </div>
+<% end %>

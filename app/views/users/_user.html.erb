@@ -1,0 +1,35 @@
+<h1 class="card-title mb-3">User Profile</h1>
+<div class="card">
+  <div class="card-body">
+    <div class="vstack">
+      <div class="hstack gap-3 border-bottom pb-3 mb-3">
+        <img src="<%= user.profile_picture %>" class="rounded-circle" width="80px" height="80px" alt="User Profile Picture" />
+        <div class="vstack justify-content-center">
+          <div class="hstack gap-2 flex-wrap">
+            <h3 class="card-title m-0"><%= user.first_name %> <%= user.last_name %></h3>
+            <% if user.officer %>
+              <span class="badge rounded-pill text-bg-danger">Officer</span>
+            <% end %>
+          </div>
+          <p class="card-text"><%= user.email %></p>
+        </div>
+        <div class="vstack text-end justify-content-center">
+          <span>Total Points</span>
+          <span class="fw-light display-6 <%= 'text-success' if @total_points >= 10 %>">
+            <%= @total_points %>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex flex-column col-lg">
+          <% if policy(@user).show_all? %>
+            <%= render "form" %>
+          <% else %>
+            <%= render "officer_form" %>
+        <% end %>
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </div>
+  </div>
+</div>

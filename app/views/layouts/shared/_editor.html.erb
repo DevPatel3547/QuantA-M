@@ -1,0 +1,47 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div data-controller="editor" class="editor">
+      <div class="editor-toolbar fs-5 hstack gap-2">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" id="headingDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Heading
+          </button>
+          <ul class="dropdown-menu dropdown-links" aria-labelledby="headingDropdown">
+            <li><a class="dropdown-item" data-action="editor#h3"><h3>Heading 1</h3></a></li>
+            <li><a class="dropdown-item" data-action="editor#h4"><h4>Heading 2</h4></a></li>
+            <li><a class="dropdown-item" data-action="editor#h5"><h5>Heading 3</h5></a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" id="textAlignDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-align-center"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-links" aria-labelledby="textAlignDropdown">
+            <li><a class="dropdown-item" data-action="editor#left"><p class="text-start m-0">Left</p></a></li>
+            <li><a class="dropdown-item" data-action="editor#center"><p class="text-center m-0">Center</p></a></li>
+            <li><a class="dropdown-item" data-action="editor#right"><p class="text-end m-0">Right</p></a></li>
+          </ul>
+        </div>
+        <div class="vr"></div>
+        <button type="button" class="editor-button" data-action="editor#bold" data-editor-target="boldButton">
+          <i class="fa-solid fa-bold"></i>
+        </button>
+        <button type="button" class="editor-button" data-action="editor#italic" data-editor-target="italicButton">
+          <i class="fa-solid fa-italic"></i>
+        </button>
+        <button type="button" class="editor-button" data-action="editor#paragraph" data-editor-target="paragraphButton">
+          <i class="fa-solid fa-paragraph"></i>
+        </button>
+        <button type="button" class="editor-button" data-action="editor#codeBlock" data-editor-target="codeBlockButton">
+          <i class="fa-solid fa-code"></i>
+        </button>
+        <div class="vr"></div>
+        <button type="button" class="editor-button" data-action="editor#insertImage">
+          <i class="fa-solid fa-image"></i>
+        </button>
+      </div>
+      <div class="tiptap editor-content"></div>
+      <%= form.hidden_field field_name, class: "hidden-content-field" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<% if request.referer && URI(request.referer).path == users_path %>
+  <%= render("layouts/shared/breadcrumb", breadcrumbs: [
+    { name: "Users", path: request.referer },
+    { name: @user.first_name + " " + @user.last_name }
+  ]) %>
+<% end %>
+
+<%= render @user %>

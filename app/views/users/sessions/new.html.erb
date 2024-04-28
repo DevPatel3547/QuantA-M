@@ -1,0 +1,18 @@
+<div class="d-flex h-100 align-items-center justify-content-center">
+  <div style="width: 30rem;">
+    <h2 class="card-title">Sign in</h2>
+
+    <p>Please sign in using Google to access the QuantAM Point Tracker</p>
+
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= msg %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <%= button_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-primary", method: :post, data: {turbo: "false"} do %>
+      <i class="fab fa-google me-3"></i>Sign in with Google
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<%= form_with(model: @user) do |form| %>
+  <div class="form-check form-switch">
+    <%= form.check_box :officer, class: "form-check-input", role: "switch", id: "officerSwitch" %>
+    <%= form.label :officer, 'Officer', class: "form-check-label", for: "officerSwitch" %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Profile", class: "btn btn-primary mt-3" %>
+  </div>
+<% end %>

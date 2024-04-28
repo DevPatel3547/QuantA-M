@@ -1,0 +1,11 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Activities", path: activities_path },
+  { name: @activity.title, path: activity_path(@activity) },
+  { name: "Delete" }
+]) %>
+
+<div>
+  <h2>Delete Activity</h2>
+  <p>Are you sure you want to permanently delete <strong><%= @activity.title %></strong>?</p>
+  <%= button_to "Delete Activity", activity_path(@activity), method: :delete, class: "btn btn-danger" %>
+</div>

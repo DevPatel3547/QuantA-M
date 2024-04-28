@@ -1,0 +1,21 @@
+<div class="hstack mb-3">
+  <div class="vstack">
+    <div class="display-6">
+      <%= article.title %>
+    </div>
+    <%= article.article_module.name %>
+    <span>
+      <span class="badge rounded-pill text-bg-secondary"><%= article.article_category.name %></span>
+    </span>
+  </div>
+  <div class="ms-auto hstack gap-2 flex-wrap justify-content-end">
+    <%= link_to "Edit", edit_article_path(article), class: "btn btn-primary" %>
+    <%= link_to "Delete", delete_article_path(article), class: "btn btn-danger" %>
+  </div>
+</div>
+
+<div class="tiptap card">
+  <div class="card-body mt-3">
+    <%= article.body.html_safe %>
+  </div>
+</div>

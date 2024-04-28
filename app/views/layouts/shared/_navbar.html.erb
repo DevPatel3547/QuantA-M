@@ -1,0 +1,45 @@
+<nav class="navbar sticky-top navbar-expand-lg text-light" data-bs-theme="dark" id="navbar">
+  <div class="container pt-1 pb-1">
+    <%= link_to root_path, class: 'navbar-brand' do %>
+      <i class="fa-solid fa-atom"></i> QuantA&M
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Activities", activities_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Articles", articles_path, class: 'nav-link' %>
+        </li>
+        <% if current_user.officer? %>
+          <li class="nav-item">
+            <%= link_to "Members", users_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <%= link_to "Help", help_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <div class="dropdown">
+        <a class="nav-link" data-bs-toggle="dropdown" role="button" aria-expanded="false" data-cta_id="userDropdown">
+          <div class="d-flex align-items-center gap-3">
+            <span><%= current_user.first_name %> <%= current_user.last_name %></span>
+            <img src="<%= current_user.profile_picture %>" class="rounded-circle <%= 'border border-danger border-3' if current_user.officer? %>" width="40px" height="40px" alt="User Profile Picture" />          </div>
+        </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Profile", current_user, class: 'dropdown-item' %></li>
+          <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item d-flex align-items-center' do %>
+            <span>Sign Out</span>
+            <i class="fa-solid fa-right-from-bracket ms-auto text-danger"></i>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

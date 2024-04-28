@@ -1,0 +1,56 @@
+<%= form_with(model: @activity) do |form| %>
+  <div class="row">
+    <div class="d-flex flex-column">
+      <div class="form-floating mb-3">
+        <%= form.text_field :title, class: "form-control", id: "floatingTitle", placeholder: "Title" %>
+        <%= form.label :title, for: "floatingTitle" %>
+      </div>
+
+      <label class="form-label">Description</label>
+      <%= render partial: 'layouts/shared/editor', locals: { form: form, field_name: :description } %>
+
+      <label class="form-label">Meeting Details</label>
+
+      <div class="form-floating mb-3">
+        <%= form.collection_select :activity_type_id, ActivityType.all, :id, :title, { prompt: 'Select or create an activity type' }, class: "form-select", id: "floatingActivityType" %>
+        <%= form.label :activity_type_id, 'Activity Type', for: "floatingActivityType" %>
+      </div>
+
+      <div class="row g-2 mb-3">
+        <div class="form-floating col-md">
+          <%= form.datetime_local_field :start_time, class: "form-control", id: "floatingStartTime" %>
+          <%= form.label :start_time, 'Start Time', for: "floatingStartTime" %>
+        </div>
+
+        <div class="form-floating col-md">
+          <%= form.datetime_local_field :end_time, class: "form-control", id: "floatingEndTime" %>
+          <%= form.label :end_time, 'End Time', for: "floatingEndTime" %>
+        </div>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= form.text_field :location, class: "form-control", id: "floatingLocation", placeholder: "Location" %>
+        <%= form.label :location, for: "floatingLocation" %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= form.number_field :passcode, class: "form-control", id: "floatingPasscode", placeholder: "Passcode" %>
+        <%= form.label :passcode, for: "floatingPasscode" %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= form.number_field :points, class: "form-control", id: "floatingPoints", placeholder: "Points" %>
+        <%= form.label :points, for: "floatingPoints" %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= form.select :status, Activity.statuses.keys.map { |status| [status.humanize, status] }, {}, class: "form-control", id: "floatingStatus" %>
+        <%= form.label :status, for: "floatingStatus" %>
+      </div>
+
+      <div>
+        <%= form.submit class: "btn btn-primary mt-3" %>
+      </div>
+    </div>
+  </div>
+<% end %>

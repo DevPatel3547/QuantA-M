@@ -1,0 +1,9 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Articles", path: articles_path },
+  { name: "Modules", path: article_modules_path },
+  { name: "New" }
+]) %>
+
+<h1>New Module</h1>
+
+<%= render "form" %>

@@ -1,0 +1,6 @@
+<%= render("layouts/shared/breadcrumb", breadcrumbs: [
+  { name: "Activities", path: activities_path },
+  { name: @activity.title }
+]) %>
+
+<%= render @activity %>

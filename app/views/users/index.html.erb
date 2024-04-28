@@ -1,0 +1,52 @@
+<h1 class="mb-3">Current Members</h1>
+
+<%= form_with url: "/users", method: "get", local: true do |form| %>
+  <div class="input-group rounded">
+    <%= form.search_field :query, class: "form-control rounded", placeholder: "Search", 'aria-label': "Search", 'aria-describedby': "search-addon" %>
+    <%= form.button :submit, class: "input-group-text border-0", id: "search-addon" do %>
+      <i class="fas fa-search"></i>
+    <% end %>
+  </div>
+<% end %>
+
+<br />
+
+<% if @query.present? %>
+  <div class="hstack gap-2 mb-2">
+    <%= link_to '', users_path, class: 'btn-close' %>
+    Showing users matching "<%= @query %>".
+  </div>
+<% end %>
+
+<% if not @users.empty? %>
+  <ul class="list-group mb-3">
+    <% @users.each do |user| %>
+      <%= link_to user_path(user), class: "list-group-item list-group-item-action pt-2 pb-2" do %>
+        <div class="d-flex align-items-center">
+          <%= image_tag user.profile_picture_or_default, alt: "Profile Picture", width: "40", height: "40", class: "rounded-circle" %>
+          <div class="d-flex flex-column ms-3">
+            <div class="hstack gap-2">
+              <span class="h5 fw-bold m-0"><%= user.first_name %> <%= user.last_name %></span>
+              <% if user.officer %>
+                <span class="badge rounded-pill text-bg-danger">Officer</span>
+              <% end %>
+            </div>
+            <span class="fw-light m-0"><%= user.email %></span>
+          </div>
+          <div class="ms-auto d-none d-md-block">
+            <span class="me-2">View Profile</span>
+            <i class="fa-solid fa-arrow-right ms-auto"></i>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="alert alert-danger" role="alert">
+    No users found.
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center">
+  <%= paginate @users, remote: true %>
+</div>
